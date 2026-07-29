@@ -1,53 +1,68 @@
 import {When, Then, Given} from "@cucumber/cucumber"
-import {POManager} from "../pages/POManager";
-import {playwright} from "@playwright/test"
+import { POManager } from "../../pages/POManager.js";
+import {expect} from "@playwright/test"
+import { chromium } from "playwright";
 
-Given('User opens application', async function () {
-  // Write code here that turns the phrase above into concrete actions
-  // We can't pass the page directly here
-  const browser = await playwright.chromium.launch()
-  const context = await browser.newContext()
-  const page = await context.newContext()
-  const poManger = new POManager(page)
-  const loginPage = poManger.getLoginPage();
-    await loginPage.goTo()
+Given("User opens application", async function () {
+
+    this.browser = await chromium.launch({
+        headless: false
+    });
+
+    this.context = await this.browser.newContext();
+    this.page = await this.context.newPage();
+
+    this.poManger = new POManager(this.page);
+    this.loginPage = this.poManger.getLoginPage();
+
+    await this.loginPage.goTo();
 });
 
-// Test data username and password coming from feature file
 When('User logs in using {string} and {string}', async function (UserName, Password) {
-  // Write code here that turns the phrase above into concrete actions
-  await loginPage.ValidLogin(UserName,Password)
-    
+
+    await this.loginPage.ValidLogin(UserName, Password);
+
 });
 
 When('User adds {string} to cart', async function (productName) {
-  // Write code here that turns the phrase above into concrete actions
-  const dashboardPage = poManger.getDashboardPage()
-  await dashboardPage.searchProductAndAddToCart(productName)
-  await dashboardPage.navigateToCartPage()
+
+    this.dashboardPage = this.poManger.getDashboardPage();
+
+    await this.dashboardPage.searchProductAndAddToCart(productName);
+    await this.dashboardPage.navigateToCartPage();
 
 });
 
 When('Verify {string} is Displayed in the cart', async function (productName) {
-  // Write code here that turns the phrase above into concrete actions
-  const cartPage = poManger.getCartPage()
-    await cartPage.VerifyProductIsDisplayed(productName)
-    await cartPage.navigateToPaymentPage()
-  
+
+    this.cartPage = this.poManger.getCartPage();
+
+    await this.cartPage.VerifyProductIsDisplayed(productName);
+    await this.cartPage.navigateToPaymentPage();
 
 });
 
 When('Enter the Valid Details and User proceeds to checkout', async function () {
-  // Write code here that turns the phrase above into concrete actions
-  const paymentPage=poManger.getPaymentPage()
-    await paymentPage.searchCountryAndSelect("ind"," India")
-    const orderID = await paymentPage.SubmitAndGetOrderId("123","Vikrant Bulbule");
-    console.log(orderID);
+
+    this.paymentPage = this.poManger.getPaymentPage();
+
+    await this.paymentPage.searchCountryAndSelect("ind", " India");
+
+    this.orderID = await this.paymentPage.SubmitAndGetOrderId(
+        "123",
+        "Vikrant Bulbule"
+    );
+
+    console.log(this.orderID);
+
 });
 
 Then('Order should be displayed in Order History', async function () {
-  // Write code here that turns the phrase above into concrete actions
-  await dashboardPage.navigateToOrdersPage();
-    const orderHistoryPage=poManger.getOrderHistoryPage()
-    await orderHistoryPage.searchOrderAndSelect(orderID)
+
+    await this.dashboardPage.navigateToOrdersPage();
+
+    this.orderHistoryPage = this.poManger.getOrderHistoryPage();
+
+    await this.orderHistoryPage.searchOrderAndSelect(this.orderID);
+
 });

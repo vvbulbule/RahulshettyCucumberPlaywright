@@ -1,8 +1,8 @@
-import {LoginPage} from "./LoginPage"
-import {DashboardPage} from "./DashboardPage"
-import {CartPage} from "./CartPage"
-import { PaymentPage } from "./PaymentPage";
-import { OrderHistoryPage } from "./OrderHistoryPage";
+import { LoginPage } from "./LoginPage.js";
+import { DashboardPage } from "./DashboardPage.js";
+import { CartPage } from "./CartPage.js";
+import { PaymentPage } from "./PaymentPage.js";
+import { OrderHistoryPage } from "./OrderHistoryPage.js";
 
 
 
