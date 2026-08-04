@@ -5,14 +5,7 @@ import { chromium } from "playwright";
  
 Given("User opens application", async function () {
  
-      this.browser = await chromium.launch({
-        headless: false
-    });
-
-    this.context = await this.browser.newContext();
-    this.page = await this.context.newPage();
- 
-    this.poManger = new POManager(this.page);
+    
     this.loginPage = this.poManger.getLoginPage();
  
     await this.loginPage.goTo();
