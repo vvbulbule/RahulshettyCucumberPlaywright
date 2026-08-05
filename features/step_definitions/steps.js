@@ -5,7 +5,7 @@ import { chromium } from "playwright";
  
 Given("User opens application", async function () {
  
-    
+     
     this.loginPage = this.poManger.getLoginPage();
  
     await this.loginPage.goTo();
