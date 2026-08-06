@@ -1,5 +1,5 @@
 Feature: Place Order
-
+  @Regression
   Scenario: Place an order successfully
     Given User opens application
     When User logs in using "vvbulbule@gmail.com" and "V12bulbule@"

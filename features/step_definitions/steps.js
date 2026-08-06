@@ -60,3 +60,16 @@ Then('Order should be displayed in Order History', async function () {
     await this.orderHistoryPage.searchOrderAndSelect(this.orderID);
  
 });
+
+Given('User opens Login Ecommerce application2 with {string} and {string}', {timeout : 100*1000}, async function (Username2, Password2) {
+  // Write code here that turns the phrase above into concrete actions
+  await this.page.goto("https://rahulshettyacademy.com/loginpagePractise/")
+    await this.page.locator("#username").fill(Username2)//id=username
+    await this.page.locator("[type='password']").fill(Password2)//InValid value for Password
+    await this.page.locator("#signInBtn").click()
+});
+
+Then('Verify Error message is Displayed', async function () {
+  // Write code here that turns the phrase above into concrete actions
+  await expect(this.page.locator("[style='display: block;']")).toContainText("Incorrect username/password.");
+});
