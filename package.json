@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "CucumberParallelTests": "npx cucumber-js --parallel 2 --retry 1",
-    "CucumberRegression" : "npx cucumber-js --tags @Regression --retry 1 --exit"
+    "CucumberRegression": "npx cucumber-js --tags @Regression --retry 1 --exit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@azure/identity": "^4.13.1",
+    "@azure/playwright": "^1.1.6",
     "@playwright/test": "^1.62.0",
     "@types/node": "^26.1.2"
   },
