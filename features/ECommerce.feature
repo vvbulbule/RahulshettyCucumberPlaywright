@@ -6,4 +6,4 @@ Feature: Place Order
     And User adds "ZARA COAT 3" to cart
     Then Verify "ZARA COAT 3" is Displayed in the cart
     And Enter the Valid Details and User proceeds to checkout
-    Then Order should be displayed in Order History
+    Then Order should be displayed in Order History 
