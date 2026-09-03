@@ -3,7 +3,7 @@ import { Before, After, BeforeStep, AfterStep, Status } from "@cucumber/cucumber
 import { chromium } from "playwright";
 
 // This Before is applied for Every Scenario in Feature File
-Before(async function () { 
+Before(async function () {  
     this.browser = await chromium.launch({
            headless: false
        });
