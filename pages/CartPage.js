@@ -1,7 +1,8 @@
 import {expect} from "@playwright/test"
 export class CartPage{
     constructor (page){
-        // if we want to declare any Locators then better to declare it in constructor
+
+        // if we want to declare any Locators then better to declare it in constructor itself
         // this.VariableName so this is refreing to current class variables
         // this.VariableName is class level Variables i.e We are Storing the Locotor in Variable
         // if somebody creates an object for this class LoginPage all the variables will be initialized
